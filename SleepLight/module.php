@@ -100,7 +100,7 @@
 
 	public function NextStep() {
 	
-		$newDimValue = $this->GetIDForIdent("Intensity") - $this->ReadPropertyInteger("DimStep");		
+		$newDimValue = GetValue($this->GetIDForIdent("Intensity" ) ) - $this->ReadPropertyInteger("DimStep");		
 
 		if ($newDimValue <= 0) {
 		
