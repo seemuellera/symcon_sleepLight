@@ -124,7 +124,7 @@
 			return 2;
 		}
 
-		// New Dim Step is still positive, so we execute it
+		IPS_LogMessage($_IPS['SELF'], "SLEEPLIGHT - Dimming device $targetId to new level $newDimValue");
 
 		if (preg_match('/Z-Wave/', $targetModuleName) ) {
 			
