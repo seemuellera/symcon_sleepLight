@@ -20,7 +20,7 @@
 
 		// Properties
 		$this->RegisterPropertyString("Sender","SleepLight");
-		$this->RegisterPropertyInteger("TargetId");
+		$this->RegisterPropertyInteger("TargetId",1);
 		$this->RegisterPropertyInteger("DimStep",1);
 		$this->RegisterPropertyInteger("DimStart",50);
 		$this->RegisterPropertyInteger("RefreshInterval",0);
