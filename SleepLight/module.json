@@ -1,0 +1,14 @@
+{
+  "id": "{1A7D15A9-280D-4DE8-A4FC-17190ECFB749}",
+  "name": "SleepLight",
+  "type": 3,
+  "vendor": "Andreas",
+  "aliases": 
+  [
+	  "SleepLight"
+  ],
+  "parentRequirements": [],
+  "childRequirements": [],
+  "implemented": [],
+  "prefix": "SLEEPLIGHT"
+}
