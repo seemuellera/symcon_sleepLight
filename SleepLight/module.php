@@ -95,7 +95,7 @@
 	public function SwitchOn() {
 	
 		SetValue($this->GetIDForIdent("Intensity"), $this->ReadPropertyInteger("DimStart") );	
-		SetValue($this->GetIDForIdent("Status"), $true );	
+		SetValue($this->GetIDForIdent("Status"), true );	
 	}
 
 	public function NextStep() {
@@ -142,7 +142,7 @@
 	public function SwitchOff() {
 	
 		$this->SetDim(0);
-		SetValue($this->GetIDForIdent("Status"), $false);
+		SetValue($this->GetIDForIdent("Status"), false);
 	}
 
 	public function RequestAction($Ident, $Value) {
