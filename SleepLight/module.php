@@ -94,7 +94,7 @@
 
 	public function SwitchOn() {
 	
-		SetValue($this->GetIDForIdent("Intensity"), $this->ReadPropertyInteger("DimStart") );	
+		$this->SetDim($this->ReadPropertyInteger("DimStart") );	
 		SetValue($this->GetIDForIdent("Status"), true );	
 	}
 
@@ -115,7 +115,7 @@
 	protected function SetDim($newDimValue) {
 
 		$targetId = $this->ReadPropertyInteger("TargetId");
-		$targetDetails = IPS_GetVariable($targetId );
+		$targetDetails = IPS_GetInstance($targetId );
 		$targetModuleName = $targetDetails['ModuleInfo']['ModuleName'];
 
 		if (! $targetModuleName) {
