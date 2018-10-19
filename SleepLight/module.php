@@ -134,7 +134,7 @@
 		if (preg_match('/HUELight/', $targetModuleName) ) {
 		
 			// Hue devices cannot be turned off by setting dim value 0
-			if ($newDimValue != 0) {
+			if ( ($newDimValue > 0) && ($newDimValue < 255) ){
 
 				HUE_SetBrightness($targetId, $newDimValue);
 			}
