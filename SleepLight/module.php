@@ -27,7 +27,6 @@
 
 		// Variables
 		$this->RegisterVariableBoolean("Status","Status","~Switch");
-		$this->RegisterVariableInteger("Intensity","Intensity");
 
 		// Default Actions
 		$this->EnableAction("Status");
@@ -62,7 +61,7 @@
 		// Initialize the form
 		$form = Array(
             		"elements" => Array(),
-			"actions" => Array()
+					"actions" => Array()
         		);
 
 		// Add the Elements
@@ -100,7 +99,7 @@
 
 	public function NextStep() {
 	
-		$newDimValue = GetValue($this->GetIDForIdent("Intensity" ) ) - $this->ReadPropertyInteger("DimStep");		
+		$newDimValue = GetValue($this->ReadPropertyInteger("TargetId") ) - $this->ReadPropertyInteger("DimStep");		
 
 		if ($newDimValue <= 0) {
 		
@@ -114,37 +113,16 @@
 
 	protected function SetDim($newDimValue) {
 
-		$targetId = $this->ReadPropertyInteger("TargetId");
-		$targetDetails = IPS_GetInstance($targetId );
-		$targetModuleName = $targetDetails['ModuleInfo']['ModuleName'];
+		$result = RequestAction($this->ReadPropertyInteger("TargetId"), $newDimValue);
 
-		if (! $targetModuleName) {
+		if (! $result) {
 
-			IPS_LogMessage($_IPS['SELF'],"SLEEPLIGHT - SwitchOn not possible for device $targetId - module type could not be identified");
+			IPS_LogMessage($_IPS['SELF'],"SLEEPLIGHT - SwitchOn not possible for device $targetId - The action could not be triggered");
 			return 2;
 		}
 
-		IPS_LogMessage($_IPS['SELF'], "SLEEPLIGHT - Dimming device $targetId to new level $newDimValue");
+		IPS_LogMessage($_IPS['SELF'], "SLEEPLIGHT - Dimming device " . $this->ReadPropertyInteger("TargetId") . " to new level $newDimValue");
 
-		if (preg_match('/Z-Wave/', $targetModuleName) ) {
-			
-			ZW_DimSet($targetId, $newDimValue);
-		}
-
-		if (preg_match('/HUELight/', $targetModuleName) ) {
-		
-			// Hue devices cannot be turned off by setting dim value 0
-			if ( ($newDimValue > 0) && ($newDimValue < 255) ){
-
-				HUE_SetBrightness($targetId, $newDimValue);
-			}
-			else {
-
-				HUE_SetState($targetId, false);
-			}
-		}
-
-		SetValue($this->GetIDForIdent("Intensity"), $newDimValue);	
 	}
 
 	public function SwitchOff() {
